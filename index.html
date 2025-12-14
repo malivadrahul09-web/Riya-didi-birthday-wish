@@ -3,62 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <title>MY PRINCESS RIYA DIDI</title>
+
 <style>
 body{
-  margin:0;
-  height:100vh;
-  overflow:hidden;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:white;
-  font-family:Arial, sans-serif;
+ margin:0;
+ overflow:hidden;
+ background:black;
+ color:white;
+ text-align:center;
+ font-family:'Segoe UI', cursive;
+ perspective:800px;
 }
-h1{
-  color:pink;
-  text-shadow:0 0 10px red;
-  animation:glow 2s infinite;
+
+/* GALAXY */
+.galaxy{
+ position:fixed;
+ width:200%;
+ height:200%;
+ background:
+  radial-gradient(circle at 20% 30%, #ff00ff33, transparent 40%),
+  radial-gradient(circle at 80% 70%, #00ffff33, transparent 40%),
+  radial-gradient(circle at 50% 50%, #ffffff22, transparent 60%);
+ animation: galaxyMove 80s linear infinite;
+ z-index:-2;
 }
-@keyframes glow{
-  0%{text-shadow:0 0 5px pink;}
-  50%{text-shadow:0 0 20px red;}
-  100%{text-shadow:0 0 5px pink;}
+@keyframes galaxyMove{
+ to{transform:translate(-400px,-400px);}
 }
+
+/* STARS */
+.star{
+ position:fixed;
+ background:white;
+ border-radius:50%;
+ animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle{from{opacity:.2;}to{opacity:1;}}
+
+/* 3D TEXT */
+#title{
+ margin-top:60px;
+ font-size:3.4em;
+ animation: float3d 4s infinite;
+ text-shadow:
+  0 0 15px #ff00ff,
+  0 0 40px #ff00ff,
+  0 0 80px #ff0080;
+}
+@keyframes float3d{
+ 50%{transform:rotateY(20deg) rotateX(10deg) translateY(-20px);}
+}
+
+.sub{
+ font-size:2.2em;
+ margin-top:20px;
+ animation:bounce 2s infinite;
+}
+@keyframes bounce{50%{transform:translateY(-20px);}}
+
+/* HEARTS */
 .heart{
-  position:fixed;
-  top:-10px;
-  font-size:24px;
-  animation:fall linear infinite;
-  color:red;
+ position:fixed;
+ bottom:-50px;
+ animation: fly 6s linear infinite, blink 1s infinite;
+ filter: drop-shadow(0 0 25px red);
 }
-@keyframes fall{
-  to{
-    transform:translateY(110vh);
-  }
+@keyframes fly{to{transform:translateY(-120vh) scale(1.8);}}
+@keyframes blink{50%{opacity:.3;}}
+
+/* BUTTERFLIES */
+.butterfly{
+ position:fixed;
+ font-size:42px;
+ filter: drop-shadow(0 0 15px currentColor);
+ animation: flutter linear infinite;
 }
+@keyframes flutter{
+ from{transform:translateY(100vh) scale(0.5);}
+ to{transform:translateY(-120vh) scale(1.4);}
+}
+
+/* SPELL LETTER */
+.letter{
+ position:fixed;
+ font-size:48px;
+ animation: letterFloat 3s infinite;
+}
+@keyframes letterFloat{50%{transform:translateY(-15px);}}
+
+/* CAKE */
+.cake{
+ font-size:80px;
+ margin-top:20px;
+ animation:cake 2s infinite;
+}
+@keyframes cake{50%{transform:scale(1.1);}}
+
+/* FIREWORK */
+.firework{
+ position:fixed;
+ width:6px;height:6px;
+ background:yellow;
+ border-radius:50%;
+ animation: explode 1.5s infinite;
+}
+@keyframes explode{to{transform:scale(25);opacity:0;}}
 </style>
 </head>
+
 <body>
 
-<h1>🎉 HAPPY BIRTHDAY 🎉</h1>
-<h1>💖 MY PRINCESS RIYA DIDI 💖</h1>
+<div class="galaxy"></div>
 
+<div id="title">💖 MY PRINCESS RIYA DIDI 💖</div>
+<div class="sub">🎉 Happy Birthday To You 🎉</div>
+<div class="cake">🎂</div>
+
+<!-- MUSIC -->
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
 </audio>
 
 <script>
+// STARS
+for(let i=0;i<180;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.width=s.style.height=Math.random()*3+1+"px";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ document.body.appendChild(s);
+}
+
+// HEARTS
 setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*3+2)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
-},300);
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=Math.random()*50+40+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+},120);
+
+// BUTTERFLIES
+const colors=["#ff69b4","#00ffff","#ffff00","#ff4500","#7fff00","#ff00ff"];
+setInterval(()=>{
+ let b=document.createElement("div");
+ b.className="butterfly";
+ b.innerHTML="🦋";
+ b.style.color=colors[Math.floor(Math.random()*colors.length)];
+ b.style.left=Math.random()*100+"vw";
+ b.style.animationDuration=(Math.random()*6+6)+"s";
+ document.body.appendChild(b);
+ setTimeout(()=>b.remove(),12000);
+},700);
+
+// SPELL TEXT
+"HAPPY BIRTHDAY RIYA DIDI".split("").forEach((ch,i)=>{
+ if(ch===" ") return;
+ let l=document.createElement("div");
+ l.className="letter";
+ l.innerHTML="🦋 "+ch;
+ l.style.left=5+i*3+"vw";
+ l.style.top="55vh";
+ l.style.color=colors[i%colors.length];
+ document.body.appendChild(l);
+});
+
+// FIREWORK
+setInterval(()=>{
+ let f=document.createElement("div");
+ f.className="firework";
+ f.style.left=Math.random()*100+"vw";
+ f.style.top=Math.random()*60+"vh";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),1500);
+},600);
+
+// REAL VOICE (AUTO)
+setTimeout(()=>{
+ const msg=new SpeechSynthesisUtterance(
+  "Happy Birthday to you. Happy Birthday to you. Happy Birthday dear Riya Didi. May God bless you."
+ );
+ msg.lang="en-IN";
+ msg.rate=0.9;
+ msg.pitch=1.2;
+ speechSynthesis.cancel();
+ speechSynthesis.speak(msg);
+},2000);
 </script>
 
 </body>

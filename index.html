@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MY PRINCESS RIYA DIDI</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  font-family:Arial, sans-serif;
+}
+h1{
+  color:pink;
+  text-shadow:0 0 10px red;
+  animation:glow 2s infinite;
+}
+@keyframes glow{
+  0%{text-shadow:0 0 5px pink;}
+  50%{text-shadow:0 0 20px red;}
+  100%{text-shadow:0 0 5px pink;}
+}
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:24px;
+  animation:fall linear infinite;
+  color:red;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+<h1>💖 MY PRINCESS RIYA DIDI 💖</h1>
+
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
